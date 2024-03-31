@@ -195,12 +195,10 @@ void Course::displayCoursesInList()
     {
         throw CourseException("CourseList File could not be opened!");
     }
-    string line;
-    cout << "Course Code\tCourse Name\tCredit Hours\tDepartment\tSemester\tYear\tTeacher ID" << endl;
     Course temp;
     while (file >> temp)
     {
-        cout << temp.getCode() << "\t" << temp.getName() << "\t" << temp.getCreditHours() << "\t" << temp.getDepartment() << "\t" << temp.getSemester() << "\t" << temp.getYear() << "\t" << temp.getTeacherID() << endl;
+        cout << temp;
     }
     file.close();
 }
@@ -344,12 +342,13 @@ set<Course> Course::getAllCourses()
 
 ostream &operator<<(ostream &out, const Course &course)
 {
-    out << "---Course Code: " << course.code << "---\n"
-        << "Course Name: " << course.name << endl
-        << "Credit Hours: " << course.creditHours << "\tDepartment: " 
-        << course.department << "\tSemester: " << course.semester 
-        << "\tYear: " << course.year << "\tAssigned Teacher ID: " 
-        << ((course.teacherID.empty()) ? "**" : course.teacherID) << endl << endl;
+    out << "--- Course Code: " << course.code << " ---\n"
+        << "Course Name: " << course.name
+        << "\t Credit Hours: " << course.creditHours << "\t Department: "
+        << course.department << "\t Semester: " << course.semester
+        << "\t Year: " << course.year << "\t Assigned Teacher ID: "
+        << ((course.teacherID.empty() || course.teacherID == "**") ? "[Unassigned]" : course.teacherID) << endl
+        << endl;
     return out;
 }
 

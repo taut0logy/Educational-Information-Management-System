@@ -9,7 +9,7 @@ using namespace std;
 
 class Teacher {
     public:
-        Teacher() = default;
+        Teacher();
         Teacher(const string &name, const string &id, const string &department, const string &email, const string &phone, const string &address, const int &officeRoom, const string &designation, const string &joiningDate, const string &qualification);
         Teacher(const Teacher& teacher);
         Teacher(Teacher&& teacher) noexcept;

@@ -19,15 +19,24 @@ void showWelcomeMessage()
 
 void showAboutMessage()
 {
-    cout << "This is an Educational Information Management System." << endl;
-    cout << "It is designed to manage and access the information teachers, and courses." << endl;
-    cout << "An admin can add, remove, and display users, Teachers or Courses." << endl;
-    cout << "Students can view detailed information about their teachers." << endl;
+    cout << "                               About" << endl;
+    cout << "----------------------------------------------------------------------------" << endl;
+    cout << "           This is an Educational Information Management System." << endl;
+    cout << " It is designed to manage and access the information teachers, and courses." << endl;
+    cout << "      An admin can add, remove, and display users, Teachers or Courses." << endl;
+    cout << "        Students can view detailed information about their teachers." << endl;
+    cout << "----------------------------------------------------------------------------" << endl;
+    cout << "                           Developed by:" << endl;
+    cout << "                           - Radia Ahsan" << endl;
+    cout << endl;
     cout << "Press Enter to continue...";
 }
 
 void showMainMenu()
 {
+    cout << "                            Main Menu" << endl;
+    cout << "         ------------------------------------------------" << endl
+         << endl;
     cout << "         Please select an option from the following menu:" << endl;
     cout << "                         1. Login" << endl;
     cout << "                         2. About" << endl;
@@ -37,6 +46,9 @@ void showMainMenu()
 
 void showAdminMenu()
 {
+    cout << "                           Admin Panel" << endl;
+    cout << "         ------------------------------------------------" << endl
+         << endl;
     cout << "         Please select an option from the following menu:" << endl
          << endl;
     cout << "                         1. Add User" << endl;
@@ -52,46 +64,55 @@ void showAdminMenu()
 
 void showAdminCourseMenu()
 {
+    cout << "                         Manage Courses" << endl;
+    cout << "         ------------------------------------------------" << endl
+         << endl;
     cout << "         Please select an option from the following menu:" << endl
          << endl;
-    cout << "                         1. Add Course" << endl;
-    cout << "                         2. Remove Course" << endl;
-    cout << "                         3. Edit Course" << endl;
-    cout << "                         4. Display All Courses" << endl;
-    cout << "                         5. Display Course by Code" << endl;
-    cout << "                         6. Display Courses by Name" << endl;
-    cout << "                         7. Display Courses by Department" << endl;
-    cout << "                         8. Display Courses by Semester" << endl;
-    cout << "                         9. Display Courses by Year" << endl;
-    cout << "                         10. Display courses assigned to teacher" << endl;
-    cout << "                         11. Assign Teacher" << endl;
-    cout << "                         12. Unassign Teacher" << endl;
-    cout << "                         13. Logout" << endl;
-    cout << "                         14. Go Back" << endl;
-    cout << "                         0. Exit" << endl;
+    cout << "             1. Add Course" << endl;
+    cout << "             2. Remove Course" << endl;
+    cout << "             3. Edit Course" << endl;
+    cout << "             4. Display All Courses" << endl;
+    cout << "             5. Display Course by Code" << endl;
+    cout << "             6. Display Courses by Name" << endl;
+    cout << "             7. Display Courses by Department" << endl;
+    cout << "             8. Display Courses by Semester" << endl;
+    cout << "             9. Display Courses by Year" << endl;
+    cout << "             10. Display courses assigned to teacher" << endl;
+    cout << "             11. Assign Teacher" << endl;
+    cout << "             12. Unassign Teacher" << endl;
+    cout << "             13. Logout" << endl;
+    cout << "             14. Go Back" << endl;
+    cout << "             0. Exit" << endl;
     cout << endl;
 }
 
 void showAdminTeacherMenu()
 {
+    cout << "                         Manage Teachers" << endl;
+    cout << "         ------------------------------------------------" << endl
+         << endl;
     cout << "         Please select an option from the following menu:" << endl
          << endl;
-    cout << "                         1. Add Teacher" << endl;
-    cout << "                         2. Remove Teacher" << endl;
-    cout << "                         3. Edit Teacher" << endl;
-    cout << "                         4. Display All Teachers" << endl;
-    cout << "                         5. Find Teacher by ID" << endl;
-    cout << "                         6. Display Teachers by Name" << endl;
-    cout << "                         7. Display Teachers by Department" << endl;
-    cout << "                         8. Display Teachers by Designation" << endl;
-    cout << "                         9. Logout" << endl;
-    cout << "                         10. Go Back" << endl;
-    cout << "                         0. Exit" << endl;
+    cout << "                1. Add Teacher" << endl;
+    cout << "                2. Remove Teacher" << endl;
+    cout << "                3. Edit Teacher" << endl;
+    cout << "                4. Display All Teachers" << endl;
+    cout << "                5. Find Teacher by ID" << endl;
+    cout << "                6. Display Teachers by Name" << endl;
+    cout << "                7. Display Teachers by Department" << endl;
+    cout << "                8. Display Teachers by Designation" << endl;
+    cout << "                9. Logout" << endl;
+    cout << "                10. Go Back" << endl;
+    cout << "                0. Exit" << endl;
     cout << endl;
 }
 
 void showUserMenu()
 {
+    cout << "                           Student Panel" << endl;
+    cout << "         ------------------------------------------------" << endl
+         << endl;
     cout << "         Please select an option from the following menu:" << endl
          << endl;
     cout << "                         1. View Teachers" << endl;
@@ -104,31 +125,37 @@ void showUserMenu()
 
 void showUserTeacherMenu()
 {
+    cout << "                         View Teachers" << endl
+         << "         ------------------------------------------------"
+         << endl;
     cout << "         Please select an option from the following menu:" << endl
          << endl;
-    cout << "                         1. View Teacher by ID" << endl;
-    cout << "                         2. View Teacher by Name" << endl;
-    cout << "                         3. View Teacher by Department" << endl;
-    cout << "                         4. View Teacher by Designation" << endl;
-    cout << "                         5. Go Back" << endl;
-    cout << "                         6. Logout" << endl;
-    cout << "                         0. Exit" << endl;
+    cout << "                   1. View Teacher by ID" << endl;
+    cout << "                   2. View Teacher by Name" << endl;
+    cout << "                   3. View Teacher by Department" << endl;
+    cout << "                   4. View Teacher by Designation" << endl;
+    cout << "                   5. Go Back" << endl;
+    cout << "                   6. Logout" << endl;
+    cout << "                   0. Exit" << endl;
     cout << endl;
 }
 
 void showUserCourseMenu()
 {
+    cout << "                         View Courses" << endl
+         << "         ------------------------------------------------"
+         << endl;
     cout << "         Please select an option from the following menu:" << endl
          << endl;
-    cout << "                         1. View Course by ID" << endl;
-    cout << "                         2. View Course by Name" << endl;
-    cout << "                         3. View Course by Department" << endl;
-    cout << "                         4. View Course by Semester" << endl;
-    cout << "                         5. View Course by Year" << endl;
-    cout << "                         6. View Course by Teacher" << endl;
-    cout << "                         7. Go Back" << endl;
-    cout << "                         8. Logout" << endl;
-    cout << "                         0. Exit" << endl;
+    cout << "                    1. View Course by ID" << endl;
+    cout << "                    2. View Course by Name" << endl;
+    cout << "                    3. View Course by Department" << endl;
+    cout << "                    4. View Course by Semester" << endl;
+    cout << "                    5. View Course by Year" << endl;
+    cout << "                    6. View Course by Teacher" << endl;
+    cout << "                    7. Go Back" << endl;
+    cout << "                    8. Logout" << endl;
+    cout << "                    0. Exit" << endl;
     cout << endl;
 }
 
@@ -161,6 +188,8 @@ int main()
             {
             case 1:
             {
+                cout << "--- Login ---" << endl
+                        << endl;
                 string username, password;
                 cout << "Enter your username: ";
                 cin >> username;
@@ -217,14 +246,28 @@ int main()
             {
             case 1:
             {
+                cout << "--- Add User ---" << endl
+                        << endl;
                 string username, password;
                 cout << "Enter the username: ";
                 cin >> username;
                 cout << "Enter the password: ";
                 inputPassword(password);
+                string confirmPassword;
+                cout << "Confirm your password: ";
+                inputPassword(confirmPassword);
+                if (password != confirmPassword)
+                {
+                    cout << "Error: Passwords do not match!" << endl;
+                    cout << "Press Enter to continue...";
+                    cin.ignore();
+                    cin.ignore();
+                    break;
+                }
                 try
                 {
                     User::addUserToList(username, password);
+                    cout << "User added successfully!" << endl;
                 }
                 catch (UserException &e)
                 {
@@ -237,16 +280,25 @@ int main()
             }
             case 2:
             {
+                cout << "--- Remove User ---" << endl
+                        << endl;
                 string username;
                 cout << "Enter the username: ";
                 cin >> username;
-                try
+                char ch;
+                cout << "Are you sure you want to delete the user with username " << username << "? (Y/N): ";
+                cin >> ch;
+                if (ch == 'Y' || ch == 'y')
                 {
-                    User::removeUserFromList(username);
-                }
-                catch (UserException &e)
-                {
-                    cout << e.what() << endl;
+                    try
+                    {
+                        User::removeUserFromList(username);
+                        cout << "User removed successfully!" << endl;
+                    }
+                    catch (UserException &e)
+                    {
+                        cout << e.what() << endl;
+                    }
                 }
                 cout << "Press Enter to continue...";
                 cin.ignore();
@@ -255,6 +307,8 @@ int main()
             }
             case 3:
             {
+                cout << "--- Display Users ---" << endl
+                        << endl;
                 try
                 {
                     cout << "The list of users is as follows:" << endl
@@ -281,6 +335,8 @@ int main()
                 {
                 case 1:
                 {
+                    cout << "--- Add Teacher ---" << endl
+                            << endl;
                     string name, department, email, phone, address, designation, joiningDate, qualification;
                     int officeRoom;
                     cin.ignore();
@@ -306,6 +362,7 @@ int main()
                     try
                     {
                         Teacher teacher = Teacher::createNewTeacher(name, department, email, phone, address, officeRoom, designation, joiningDate, qualification);
+                        cout << "Teacher added successfully!" << endl;
                     }
                     catch (TeacherException &e)
                     {
@@ -318,6 +375,8 @@ int main()
                 }
                 case 2:
                 {
+                    cout << "--- Remove Teacher ---" << endl
+                            << endl;
                     string id;
                     cout << "Enter the ID: ";
                     getline(cin, id);
@@ -330,6 +389,7 @@ int main()
                         {
                             Teacher teacher = Teacher::getTeacherById(id);
                             teacher.deletePermenantly();
+                            cout << "Teacher removed successfully!" << endl;
                         }
                         catch (TeacherException &e)
                         {
@@ -343,6 +403,8 @@ int main()
                 }
                 case 3:
                 {
+                    cout << "--- Edit Teacher ---" << endl
+                            << endl;
                     string id;
                     cout << "Enter the ID: ";
                     getline(cin, id);
@@ -449,6 +511,7 @@ int main()
                             newTeacher.setQualification(teacher.getQualification());
                         }
                         teacher.edit(newTeacher);
+                        cout << "Teacher edited successfully!" << endl;
                     }
                     catch (TeacherException &e)
                     {
@@ -461,11 +524,17 @@ int main()
                 }
                 case 4:
                 {
+                    cout << "--- Display Teachers ---" << endl
+                            << endl;
                     try
                     {
                         cout << "The list of teachers is as follows:" << endl
                              << endl;
-                        Teacher::getTeachersList();
+                             set<Teacher> teachers = Teacher::getTeachersList();
+                        for (Teacher teacher : teachers)
+                        {
+                            cout << teacher;
+                        }
                     }
                     catch (TeacherException &e)
                     {
@@ -478,6 +547,8 @@ int main()
                 }
                 case 5:
                 {
+                    cout << "--- Find Teacher by ID ---" << endl
+                            << endl;
                     string id;
                     cout << "Enter the ID: ";
                     cin >> id;
@@ -495,9 +566,12 @@ int main()
                     cout << "Press Enter to continue...";
                     cin.ignore();
                     cin.ignore();
+                    break;
                 }
                 case 6:
                 {
+                    cout << "--- Display Teachers by Name ---" << endl
+                            << endl;
                     string name;
                     cout << "Enter the name: \n";
                     cin.ignore();
@@ -519,9 +593,12 @@ int main()
                     cout << "Press Enter to continue...";
                     cin.ignore();
                     cin.ignore();
+                    break;
                 }
                 case 7:
                 {
+                    cout << "--- Display Teachers by Department ---" << endl
+                            << endl;
                     string department;
                     cout << "Enter the department: \n";
                     cin.ignore();
@@ -543,10 +620,12 @@ int main()
                     cout << "Press Enter to continue...";
                     cin.ignore();
                     cin.ignore();
+                    break;
                 }
-
                 case 8:
                 {
+                    cout << "--- Display Teachers by Designation ---" << endl
+                            << endl;
                     string designation;
                     cout << "Enter the designation: \n";
                     cin.ignore();
@@ -568,10 +647,11 @@ int main()
                     cout << "Press Enter to continue...";
                     cin.ignore();
                     cin.ignore();
+                    break;
                 }
-
                 case 9:
                 {
+                    cout << "Logging out..." << endl;
                     char ch;
                     cout << "Are you sure you want to logout? (Y/N): ";
                     cin >> ch;
@@ -581,7 +661,6 @@ int main()
                     }
                     break;
                 }
-
                 case 10:
                 {
                     break;
@@ -597,7 +676,6 @@ int main()
                     }
                     break;
                 }
-
                 default:
                 {
                     cout << "Invalid choice! Please try again." << endl;
@@ -619,6 +697,8 @@ int main()
                 {
                 case 1:
                 {
+                    cout << "--- Add Course ---" << endl
+                            << endl;
                     string name, code, department, teacherID;
                     int semester, year;
                     double creditHours;
@@ -635,9 +715,9 @@ int main()
                     cin >> semester;
                     cout << "Enter the year: \n";
                     cin >> year;
-                    cout << "Enter the teacher ID (Press Enter to skip): ";
+                    cout << "Enter the teacher ID (Press * to skip): ";
                     cin >> teacherID;
-                    if (teacherID.empty())
+                    if (teacherID.empty() || teacherID == "*")
                     {
                         teacherID = "";
                     }
@@ -682,6 +762,8 @@ int main()
                 }
                 case 2:
                 {
+                    cout << "--- Remove Course ---" << endl
+                            << endl;
                     string code;
                     cout << "Enter the code: ";
                     cin >> code;
@@ -709,6 +791,8 @@ int main()
                 }
                 case 3:
                 {
+                    cout << "--- Edit Course ---" << endl
+                            << endl;
                     string code;
                     cout << "Enter the code: ";
                     cin >> code;
@@ -789,9 +873,12 @@ int main()
                     cout << "Press Enter to continue...";
                     cin.ignore();
                     cin.ignore();
+                    break;
                 }
                 case 4:
                 {
+                    cout << "--- Display All Courses ---" << endl
+                            << endl;
                     try
                     {
                         cout << "The list of courses is as follows:" << endl
@@ -809,6 +896,8 @@ int main()
                 }
                 case 5:
                 {
+                    cout << "--- Display Course by Code ---" << endl
+                            << endl;
                     string code;
                     cout << "Enter the code: ";
                     cin >> code;
@@ -830,6 +919,8 @@ int main()
                 }
                 case 6:
                 {
+                    cout << "--- Display Courses by Name ---" << endl
+                            << endl;
                     string name;
                     cout << "Enter the name: \n";
                     cin.ignore();
@@ -855,6 +946,8 @@ int main()
                 }
                 case 7:
                 {
+                    cout << "--- Display Courses by Department ---" << endl
+                            << endl;
                     string department;
                     cout << "Enter the department: ";
                     cin >> department;
@@ -879,6 +972,8 @@ int main()
                 }
                 case 8:
                 {
+                    cout << "--- Display Courses by Semester ---" << endl
+                            << endl;
                     int semester;
                     cout << "Enter the semester: ";
                     cin >> semester;
@@ -903,6 +998,8 @@ int main()
                 }
                 case 9:
                 {
+                    cout << "--- Display Courses by Year ---" << endl
+                            << endl;
                     int year;
                     cout << "Enter the year: ";
                     cin >> year;
@@ -927,6 +1024,8 @@ int main()
                 }
                 case 10:
                 {
+                    cout << "--- Display courses assigned to teacher ---" << endl
+                            << endl;
                     string teacherID;
                     cout << "Enter the teacher ID: ";
                     cin >> teacherID;
@@ -951,6 +1050,8 @@ int main()
                 }
                 case 11:
                 {
+                    cout << "--- Assign Teacher ---" << endl
+                            << endl;
                     string teacherID, courseID;
                     cout << "Enter the teacher ID: ";
                     cin >> teacherID;
@@ -974,6 +1075,8 @@ int main()
                 }
                 case 12:
                 {
+                    cout << "--- Unassign Teacher ---" << endl
+                            << endl;
                     string teacherID, courseID;
                     cout << "Enter the teacher ID: ";
                     cin >> teacherID;
@@ -997,6 +1100,7 @@ int main()
                 }
                 case 13:
                 {
+                    cout << "Logging out..." << endl;
                     cout << "Are you sure you want to logout? (Y/N): ";
                     char ch;
                     cin >> ch;
@@ -1030,6 +1134,7 @@ int main()
                     break;
                 }
                 }
+                break;
             }
             // case 6:
             // {
@@ -1076,6 +1181,7 @@ int main()
             // }
             case 6:
             {
+                cout << "Logging out..." << endl;
                 cout << "Are you sure you want to logout? (Y/N): ";
                 char ch;
                 cin >> ch;
@@ -1124,6 +1230,8 @@ int main()
                 {
                 case 1:
                 {
+                    cout << "--- View Teacher by ID ---" << endl
+                            << endl;
                     string id;
                     cout << "Enter the ID: ";
                     cin >> id;
@@ -1145,6 +1253,8 @@ int main()
                 }
                 case 2:
                 {
+                    cout << "--- View Teacher by Name ---" << endl
+                            << endl;
                     string name;
                     cout << "Enter the name: \n";
                     cin.ignore();
@@ -1170,6 +1280,8 @@ int main()
                 }
                 case 3:
                 {
+                    cout << "--- View Teacher by Department ---" << endl
+                            << endl;
                     string department;
                     cout << "Enter the department: ";
                     cin >> department;
@@ -1194,6 +1306,8 @@ int main()
                 }
                 case 4:
                 {
+                    cout << "--- View Teacher by Designation ---" << endl
+                            << endl;
                     string designation;
                     cout << "Enter the designation: \n";
                     cin.ignore();
@@ -1223,6 +1337,7 @@ int main()
                 }
                 case 6:
                 {
+                    cout << "Logging out..." << endl;
                     cout << "Are you sure you want to logout? (Y/N): ";
                     char ch;
                     cin >> ch;
@@ -1264,6 +1379,8 @@ int main()
                 {
                 case 1:
                 {
+                    cout << "--- View Course by Code ---" << endl
+                            << endl;
                     string code;
                     cout << "Enter the code: ";
                     cin >> code;
@@ -1285,6 +1402,8 @@ int main()
                 }
                 case 2:
                 {
+                    cout << "--- View Course by Name ---" << endl
+                            << endl;
                     string name;
                     cout << "Enter the name: \n";
                     cin.ignore();
@@ -1310,6 +1429,8 @@ int main()
                 }
                 case 3:
                 {
+                    cout << "--- View Course by Department ---" << endl
+                            << endl;
                     string department;
                     cout << "Enter the department: ";
                     cin >> department;
@@ -1334,6 +1455,8 @@ int main()
                 }
                 case 4:
                 {
+                    cout << "--- View Course by Semester ---" << endl
+                            << endl;
                     int semester;
                     cout << "Enter the semester: ";
                     cin >> semester;
@@ -1359,6 +1482,8 @@ int main()
                 }
                 case 5:
                 {
+                    cout << "--- View Course by Year ---" << endl
+                            << endl;
                     int year;
                     cout << "Enter the year: ";
                     cin >> year;
@@ -1383,6 +1508,8 @@ int main()
                 }
                 case 6:
                 {
+                    cout << "--- View Courses Assigned  to teacher ---" << endl
+                            << endl;
                     string teacherID;
                     cout << "Enter the teacher ID: ";
                     cin >> teacherID;
@@ -1411,6 +1538,7 @@ int main()
                 }
                 case 8:
                 {
+                    cout << "Logging out..." << endl;
                     cout << "Are you sure you want to logout? (Y/N): ";
                     char ch;
                     cin >> ch;
@@ -1444,6 +1572,8 @@ int main()
             }
             case 3:
             {
+                cout << "--- Change Password ---" << endl;
+                cout << endl;
                 string password;
                 cout << "Enter your new password: ";
                 inputPassword(password);
@@ -1484,6 +1614,7 @@ int main()
             }
             case 4:
             {
+                cout << "Logging out..." << endl;
                 cout << "Are you sure you want to logout? (Y/N): ";
                 char ch;
                 cin >> ch;

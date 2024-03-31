@@ -1,5 +1,20 @@
 #include "Teacher.hpp"
 
+Teacher::Teacher()
+{
+    name = "";
+    id = "";
+    department = "";
+    email = "";
+    phone = "";
+    address = "";
+    officeRoom = 0;
+    designation = "";
+    joiningDate = "";
+    qualification = "";
+    courses = vector<Course>();
+}
+
 Teacher::Teacher(const string &name, const string &id, const string &department, const string &email, const string &phone, const string &address, const int &officeRoom, const string &designation, const string &joiningDate, const string &qualification)
 {
     this->name = name;
@@ -12,7 +27,7 @@ Teacher::Teacher(const string &name, const string &id, const string &department,
     this->designation = designation;
     this->joiningDate = joiningDate;
     this->qualification = qualification;
-    this->courses = {};
+    this->courses = vector<Course>();
 }
 
 Teacher::Teacher(const Teacher &teacher)
@@ -116,6 +131,7 @@ set<Teacher> Teacher::getTeachersList()
     while (in >> t)
     {
         teachers.insert(t);
+        cout << "";
     }
     in.close();
     return teachers;
@@ -155,6 +171,7 @@ set<Teacher> Teacher::getTeacherByName(const string &name)
         if (t.getName() == name)
         {
             teachers.insert(t);
+            cout << "";
         }
     }
     in.close();
@@ -175,6 +192,7 @@ set<Teacher> Teacher::getTeacherByDepartment(const string &department)
         if (t.getDepartment() == department)
         {
             teachers.insert(t);
+            cout << "";
         }
     }
     in.close();
@@ -195,6 +213,7 @@ set<Teacher> Teacher::getTeacherByDesignation(const string &designation)
         if (t.getDesignation() == designation)
         {
             teachers.insert(t);
+            cout << "";
         }
     }
     in.close();
