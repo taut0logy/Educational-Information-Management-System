@@ -28,7 +28,6 @@ Teacher::Teacher(const Teacher &teacher)
     joiningDate = teacher.joiningDate;
     qualification = teacher.qualification;
     courses = vector<Course>(teacher.courses.begin(), teacher.courses.end());
-
 }
 
 Teacher::Teacher(Teacher &&teacher) noexcept
@@ -90,14 +89,16 @@ set<string> Teacher::getTeachersIdList()
 {
     set<string> teachers;
     ifstream in("data/_teacherList.txt");
-    if(!in.is_open())
+    if (!in.is_open())
     {
-        throw TeacherException("File could not be opened!");
+        return teachers;
     }
     Teacher t;
     while (in >> t)
     {
-        teachers.insert(t.getId());
+        string id = t.getId();
+        teachers.insert(id);
+        cout << "";
     }
     in.close();
     return teachers;
@@ -107,7 +108,7 @@ set<Teacher> Teacher::getTeachersList()
 {
     set<Teacher> teachers;
     ifstream in("data/_teacherList.txt");
-    if(!in.is_open())
+    if (!in.is_open())
     {
         throw TeacherException("File could not be opened!");
     }
@@ -123,7 +124,7 @@ set<Teacher> Teacher::getTeachersList()
 Teacher Teacher::getTeacherById(const string &id)
 {
     ifstream in("data/_teacherList.txt");
-    if(!in.is_open())
+    if (!in.is_open())
     {
         throw TeacherException("File could not be opened!");
     }
@@ -144,7 +145,7 @@ set<Teacher> Teacher::getTeacherByName(const string &name)
 {
     set<Teacher> teachers;
     ifstream in("data/_teacherList.txt");
-    if(!in.is_open())
+    if (!in.is_open())
     {
         throw TeacherException("File could not be opened!");
     }
@@ -164,7 +165,7 @@ set<Teacher> Teacher::getTeacherByDepartment(const string &department)
 {
     set<Teacher> teachers;
     ifstream in("data/_teacherList.txt");
-    if(!in.is_open())
+    if (!in.is_open())
     {
         throw TeacherException("File could not be opened!");
     }
@@ -184,7 +185,7 @@ set<Teacher> Teacher::getTeacherByDesignation(const string &designation)
 {
     set<Teacher> teachers;
     ifstream in("data/_teacherList.txt");
-    if(!in.is_open())
+    if (!in.is_open())
     {
         throw TeacherException("File could not be opened!");
     }
@@ -202,29 +203,36 @@ set<Teacher> Teacher::getTeacherByDesignation(const string &designation)
 
 Teacher Teacher::createNewTeacher(const string &name, const string &department, const string &email, const string &phone, const string &address, const int &officeRoom, const string &designation, const string &joiningDate, const string &qualification)
 {
+
     set<string> teachers = Teacher::getTeachersIdList();
-    string id = "T" + to_string(rand() % 1000 + 1);
-    while(teachers.find(id) != teachers.end())
+    string id = "T" + getRandomID();
+    while (teachers.find(id) != teachers.end())
     {
-        id = "T" + to_string(rand() % 1000 + 1);
+        id = "T" + getRandomID();
     }
+
     Teacher teacher(name, id, department, email, phone, address, officeRoom, designation, joiningDate, qualification);
     ifstream in("data/_teacherList.txt");
-    if(!in.is_open())
+    if (!in.is_open())
     {
         ofstream out("data/_teacherList.txt");
+        if (!out.is_open())
+        {
+            throw TeacherException("File could not be opened!");
+        }
         out << teacher;
         out.close();
         return teacher;
     }
     ofstream out("data/_tempTeacherList.txt");
-    if(!out.is_open())
+    if (!out.is_open())
     {
-        throw TeacherException("File could not be opened!");
+        throw TeacherException("Temp File could not be opened!");
     }
     Teacher t;
     while (in >> t)
     {
+        // cout << t.getId() << ' ' << t.getName() << endl;
         out << t;
     }
     out << teacher;
@@ -238,7 +246,7 @@ Teacher Teacher::createNewTeacher(const string &name, const string &department, 
 void Teacher::deletePermenantly()
 {
     ifstream in("data/_teacherList.txt");
-    if(!in.is_open())
+    if (!in.is_open())
     {
         throw TeacherException("File could not be opened!");
     }
@@ -258,10 +266,10 @@ void Teacher::deletePermenantly()
     rename("data/_tempTeacherList.txt", "data/_teacherList.txt");
 }
 
-int Teacher::edit(const string &name, const string &department, const string &email, const string &phone, const string &address, const int &officeRoom, const string &designation, const string &joiningDate, const string &qualification)
+int Teacher::edit(Teacher &teacher)
 {
     ifstream in("data/_teacherList.txt");
-    if(!in.is_open())
+    if (!in.is_open())
     {
         throw TeacherException("File could not be opened!");
     }
@@ -273,17 +281,12 @@ int Teacher::edit(const string &name, const string &department, const string &em
         if (t == *this)
         {
             flag = 1;
-            t.name = (name == "") ? t.name : name;
-            t.department = (department == "") ? t.department : department;
-            t.email = (email == "") ? t.email : email;
-            t.phone = (phone == "") ? t.phone : phone;
-            t.address = (address == "") ? t.address : address;
-            t.officeRoom = (officeRoom == 0) ? t.officeRoom : officeRoom;
-            t.designation = (designation == "") ? t.designation : designation;
-            t.joiningDate = (joiningDate == "") ? t.joiningDate : joiningDate;
-            t.qualification = (qualification == "") ? t.qualification : qualification;
+            out << teacher;
         }
-        out << t;
+        else
+        {
+            out << t;
+        }
     }
     in.close();
     out.close();
@@ -342,14 +345,27 @@ void Teacher::setQualification(const string &qualification)
     this->qualification = qualification;
 }
 
-void Teacher::addCourse(const string &courseID)
+int Teacher::addCourse(const string &courseID)
 {
     Course course = Course::getCourseByCode(courseID);
+    if (course.getTeacherID() != "")
+    {
+        if (course.getTeacherID() == id)
+        {
+            return -1;
+        }
+        return 0;
+    }
     courses.push_back(course);
+    course.setTeacherID(id);
+    Course::editCourseInList(course);
+    Teacher::edit(*this);
+    return 1;
 }
 
-void Teacher::removeCourse(const Course &course)
+void Teacher::removeCourse(const string &courseID)
 {
+    Course course = Course::getCourseByCode(courseID);
     for (auto it = courses.begin(); it != courses.end(); it++)
     {
         if (it->getCode() == course.getCode())
@@ -357,9 +373,11 @@ void Teacher::removeCourse(const Course &course)
             it->setTeacherID("");
             Course::editCourseInList(*it);
             courses.erase(it);
+            Teacher::edit(*this);
             break;
         }
     }
+    throw TeacherException("Course not found!");
 }
 
 void Teacher::editCourse(const Course &course)
@@ -369,6 +387,7 @@ void Teacher::editCourse(const Course &course)
         if (it->getCode() == course.getCode())
         {
             *it = course;
+            Course::editCourseInList(course);
             break;
         }
     }
@@ -448,10 +467,29 @@ bool Teacher::operator<(const Teacher &teacher) const
     return id < teacher.id;
 }
 
+ostream &operator<<(ostream &out, const Teacher &teacher)
+{
+    out << "---ID: " << teacher.id << "---\n";
+    out << "Name: " << teacher.name << endl;
+    out << "Department: " << teacher.department << endl;
+    out << "Email: " << teacher.email << endl;
+    out << "Phone: " << teacher.phone << endl;
+    out << "Address: " << teacher.address << endl;
+    out << "Office Room: " << teacher.officeRoom << endl;
+    out << "Designation: " << teacher.designation << endl;
+    out << "Joining Date: " << teacher.joiningDate << endl;
+    out << "Qualification: " << teacher.qualification << endl;
+    out << "Courses: " << endl;
+    for (Course c : teacher.courses)
+    {
+        out << c;
+    }
+    out << endl;
+    return out;
+}
+
 ifstream &operator>>(ifstream &in, Teacher &teacher)
 {
-    string s;
-    int i;
     getline(in, teacher.id);
     getline(in, teacher.name);
     getline(in, teacher.department);
@@ -463,9 +501,12 @@ ifstream &operator>>(ifstream &in, Teacher &teacher)
     getline(in, teacher.designation);
     getline(in, teacher.joiningDate);
     getline(in, teacher.qualification);
-    while (getline(in, s))
+    int n;
+    in >> n;
+    in.ignore();
+    Course c;
+    for (int i = 0; i < n; i++)
     {
-        Course c;
         in >> c;
         teacher.courses.push_back(c);
     }
@@ -474,10 +515,20 @@ ifstream &operator>>(ifstream &in, Teacher &teacher)
 
 ofstream &operator<<(ofstream &out, const Teacher &teacher)
 {
-    out << teacher.id << "\n" << teacher.name << "\n" << teacher.department << "\n" << teacher.email << "\n" << teacher.phone << "\n" << teacher.address << "\n" << teacher.officeRoom << "\n" << teacher.designation << "\n" << teacher.joiningDate << "\n" << teacher.qualification << "\n";
+    out << teacher.id << "\n"
+        << teacher.name << "\n"
+        << teacher.department << "\n"
+        << teacher.email << "\n"
+        << teacher.phone << "\n"
+        << teacher.address << "\n"
+        << teacher.officeRoom << "\n"
+        << teacher.designation << "\n"
+        << teacher.joiningDate << "\n"
+        << teacher.qualification << "\n"
+        << teacher.courses.size() << "\n";
     for (Course c : teacher.courses)
     {
-        out << c;
+        out << c << "\n";
     }
     return out;
 }

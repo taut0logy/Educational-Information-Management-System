@@ -1,13 +1,16 @@
 #ifndef TEACHER_HPP
 #define TEACHER_HPP
 
+#include <bits/stdc++.h>
 #include "Utility.hpp"
 #include "Course.hpp"
 
 using namespace std;
 
-class Teacher{
+class Teacher {
     public:
+        Teacher() = default;
+        Teacher(const string &name, const string &id, const string &department, const string &email, const string &phone, const string &address, const int &officeRoom, const string &designation, const string &joiningDate, const string &qualification);
         Teacher(const Teacher& teacher);
         Teacher(Teacher&& teacher) noexcept;
         Teacher& operator=(const Teacher& teacher);
@@ -25,7 +28,7 @@ class Teacher{
 
         static Teacher createNewTeacher(const string& name, const string& department, const string& email, const string& phone, const string& address, const int& officeRoom, const string& designation, const string& joiningDate, const string& qualification);
         void deletePermenantly();
-        int edit(const string& name, const string& department, const string& email, const string& phone, const string& address, const int& officeRoom, const string& designation, const string& joiningDate, const string& qualification);
+        int edit(Teacher& teacher);
 
         void setName(const string& name);
         void setId(const string& id);
@@ -38,8 +41,8 @@ class Teacher{
         void setJoiningDate(const string& joiningDate);
         void setQualification(const string& qualification);
 
-        void addCourse(const string &courseID);
-        void removeCourse(const Course& course);
+        int addCourse(const string &courseID);
+        void removeCourse(const string &courseID);
         void editCourse(const Course& course);
         void displayCourses() const;
 
@@ -55,6 +58,7 @@ class Teacher{
         string getQualification() const;
         vector<Course> getCourses() const;
 
+        friend ostream &operator<<(ostream &out, const Teacher &teacher);
         friend ifstream &operator>>(ifstream &in, Teacher &teacher);
         friend ofstream &operator<<(ofstream &out, const Teacher &teacher);
 
@@ -70,9 +74,6 @@ class Teacher{
         string joiningDate;
         string qualification;
         vector<Course> courses;
-
-        Teacher() = default;
-        Teacher(const string &name, const string &id, const string &department, const string &email, const string &phone, const string &address, const int &officeRoom, const string &designation, const string &joiningDate, const string &qualification);
 };
 
 #endif

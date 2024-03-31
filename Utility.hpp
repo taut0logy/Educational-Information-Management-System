@@ -1,37 +1,17 @@
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
 
-#include <iostream>
-#include <fstream>
-#include <exception>
-#include <stdexcept>
-#include <string>
-#include <cstdlib>
-#include <ctime>
-#include <iomanip>
-#include <random>
-#include <algorithm>
-#include <vector>
-#include <map>
-#include <set>
-
-#include "User.hpp"
+#include <bits/stdc++.h>
+#include <conio.h>
 
 using namespace std;
 
 class TeacherException : public exception
 {
 public:
-    TeacherException(const string &message) : message(message) {}
-    TeacherException() : message("") {}
-    virtual const char *what() const noexcept override
-    {
-        if (message.empty())
-        {
-            return "Teacher Exception!";
-        }
-        return message.c_str();
-    }
+    TeacherException(const string &message);
+    TeacherException();
+    virtual const char *what() const noexcept override;
 
 private:
     string message;
@@ -40,16 +20,9 @@ private:
 class CourseException : public exception
 {
 public:
-    CourseException(const string &message) : message(message) {}
-    CourseException() : message("") {}
-    virtual const char *what() const noexcept override
-    {
-        if (message.empty())
-        {
-            return "Course Exception!";
-        }
-        return message.c_str();
-    }
+    CourseException(const string &message);
+    CourseException();
+    virtual const char *what() const noexcept override;
 
 private:
     string message;
@@ -58,64 +31,26 @@ private:
 class UserException : public exception
 {
 public:
-    UserException(const string &message) : message(message) {}
-    UserException() : message("") {}
-    virtual const char *what() const noexcept override
-    {
-        if (message.empty())
-        {
-            return "User Exception!";
-        }
-        return message.c_str();
-    }
+    UserException(const string &message);
+    UserException();
+    virtual const char *what() const noexcept override;
 
 private:
     string message;
 };
+string toLowerCase(const string& str);
 
-void clearTerminal()
-{
-#ifdef _WIN32
-    system("cls"); // For Windows
-#else
-    system("clear"); // For Unix-like systems
-#endif
-}
+string toUpperCase(const string& str);
 
-void inputPassword(string &password)
-{
-    char ch;
-    password = "";
-    while (true)
-    {
-        ch = cin.get();
-        if (ch == '\n')
-        {
-            break;
-        }
-        password += ch;
-        cout << '*';
-    }
-}
+void clearTerminal();
 
-string getRandomID()
-{
-    string id = "";
-    for (int i = 0; i < 6; i++)
-    {
-        id += to_string(rand() % 10);
-    }
-    return id;
-}
 
-unsigned long hashcode(const string &str)
-{
-    unsigned long hash = 5381;
-    for (char c : str)
-    {
-        hash = ((hash << 5) + hash) + c;
-    }
-    return hash;
-}
+void inputPassword(string &password);
+
+
+string getRandomID();
+
+unsigned long hashcode(const string &str);
+
 
 #endif

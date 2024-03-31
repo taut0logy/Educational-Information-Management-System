@@ -96,15 +96,24 @@ int Course::addCourseToList(const Course &course)
     ifstream file("data/_courseList.txt");
     if (!file.is_open())
     {
-        throw CourseException("CourseList File could not be opened!");
+        ofstream file2("data/_courseList.txt");
+        if (!file2.is_open())
+        {
+            throw CourseException("CourseList File could not be created!");
+        }
+        file2 << course;
+        file2.close();
+        return 1;
     }
+    file.seekg(0, ios::beg);
     Course temp;
     while (file >> temp)
     {
-        if (temp == course)
+        cout << temp.getCode() << " " << course.getCode() << endl;
+        if (temp.getCode() == course.getCode())
         {
             file.close();
-            throw CourseException("Course already exists!");
+            return 0;
         }
     }
     file.close();
@@ -216,6 +225,26 @@ Course Course::getCourseByCode(const string &code)
     throw CourseException("Course not found!");
 }
 
+set<Course> Course::getCoursesByName(const string &name)
+{
+    ifstream file("data/_courseList.txt");
+    if (!file.is_open())
+    {
+        throw CourseException("CourseList File could not be opened!");
+    }
+    Course temp;
+    set<Course> courses;
+    while (file >> temp)
+    {
+        if (temp.getName() == name)
+        {
+            courses.insert(temp);
+        }
+    }
+    file.close();
+    return courses;
+}
+
 set<Course> Course::getCoursesByDepartment(const string &department)
 {
     ifstream file("data/_courseList.txt");
@@ -313,6 +342,17 @@ set<Course> Course::getAllCourses()
     return courses;
 }
 
+ostream &operator<<(ostream &out, const Course &course)
+{
+    out << "---Course Code: " << course.code << "---\n"
+        << "Course Name: " << course.name << endl
+        << "Credit Hours: " << course.creditHours << "\tDepartment: " 
+        << course.department << "\tSemester: " << course.semester 
+        << "\tYear: " << course.year << "\tAssigned Teacher ID: " 
+        << ((course.teacherID.empty()) ? "**" : course.teacherID) << endl << endl;
+    return out;
+}
+
 ifstream &operator>>(ifstream &in, Course &course)
 {
     in >> course.code;
@@ -326,6 +366,6 @@ ofstream &operator<<(ofstream &out, const Course &course)
 {
     out << course.code << "\n"
         << course.name << "\n"
-        << course.creditHours << " " << course.department << " " << course.semester << " " << course.year << " " << course.teacherID << endl;
+        << course.creditHours << " " << course.department << " " << course.semester << " " << course.year << " " << ((course.teacherID.empty()) ? "**" : course.teacherID) << endl;
     return out;
 }

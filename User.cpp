@@ -6,16 +6,6 @@ User::User(const string &username, const string &password)
     this->passwordHash = hashcode(password);
 }
 
-void User::setUsername(const string &username)
-{
-    this->username = username;
-}
-
-void User::setPassword(const string &password)
-{
-    passwordHash = hashcode(password);
-}
-
 string User::getUsername() const
 {
     return username;
@@ -24,6 +14,11 @@ string User::getUsername() const
 unsigned long User::getPasswordHash() const
 {
     return passwordHash;
+}
+
+void User::setPassword(const string &password)
+{
+    passwordHash = hashcode(password);
 }
 
 bool User::operator==(const User &user) const
@@ -43,6 +38,10 @@ int User::addUserToList(const string &username, const string &password)
     if (!in)
     {
         ofstream out("data/_users.txt");
+        if (!out)
+        {
+            throw UserException("Error: UserList File could not be opened!");
+        }
         out << user;
         out.close();
         return 1;
@@ -112,7 +111,7 @@ int User::editUserInList(const string &username, const string &password)
         if (temp.getUsername() == username)
         {
             flag = 1;
-            temp.setPassword(password);
+            temp.passwordHash = hashcode(password);
             out << temp;
             continue;
         }
@@ -195,8 +194,26 @@ ofstream &operator<<(ofstream &out, const User &user)
 
 User *currentUser = nullptr;
 
-void login(string username, string password)
+unsigned long adminPasswordHash = 2110877786; // 123456
+
+void login(const string& username, const string& password)
 {
+    if (isLoggedIn())
+    {
+        throw UserException("User already logged in!");
+    }
+    if (toLowerCase(username) == "admin")
+    {
+        if (hashcode(password) == adminPasswordHash)
+        {
+            currentUser = new User("admin", password);
+            return;
+        }
+        else
+        {
+            throw UserException("Incorrect Admin Password!");
+        }
+    }
     ifstream in("data/_users.txt");
     if (!in)
     {
@@ -205,13 +222,21 @@ void login(string username, string password)
     User temp;
     while (in >> temp)
     {
-        if (temp.getUsername() == username && temp.getPasswordHash() == hashcode(password))
+        if (temp.getUsername() == username)
         {
-            currentUser = new User(temp);
-            return;
+            if (temp.getPasswordHash() == hashcode(password))
+            {
+                currentUser = new User(temp);
+                in.close();
+                return;
+            }
+            else
+            {
+                throw UserException("Incorrect Password!");
+            }
         }
     }
-    throw UserException("Invalid Username or Password!");
+    throw UserException("Invalid Username or Username does not exist!");
 }
 
 void logout()
@@ -229,3 +254,4 @@ User *getCurrentUser()
 {
     return currentUser;
 }
+

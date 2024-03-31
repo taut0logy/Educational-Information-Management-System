@@ -2,6 +2,7 @@
 #define COURSE_HPP
 
 #include "Utility.hpp"
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -34,6 +35,7 @@ public:
     static void displayCoursesInList();
 
     static Course getCourseByCode(const string &code);
+    static set<Course> getCoursesByName(const string &name);
     static set<Course> getCoursesByDepartment(const string &department);
     static set<Course> getCoursesBySemester(const int &semester);
     static set<Course> getCoursesByYear(const int &year);
@@ -43,6 +45,7 @@ public:
     bool operator==(const Course &course) const;
     bool operator<(const Course &course) const;
 
+    friend ostream &operator<<(ostream &out, const Course &course);
     friend ifstream &operator>>(ifstream &in, Course &course);
     friend ofstream &operator<<(ofstream &out, const Course &course);
 
