@@ -213,7 +213,7 @@ Course Course::getCourseByCode(const string &code)
     Course temp;
     while (file >> temp)
     {
-        if (temp.getCode() == code)
+        if (toLowerCase(temp.getCode()) == toLowerCase(code))
         {
             file.close();
             return temp;
@@ -234,7 +234,7 @@ set<Course> Course::getCoursesByName(const string &name)
     set<Course> courses;
     while (file >> temp)
     {
-        if (temp.getName() == name)
+        if (toLowerCase(temp.getName()).find(toLowerCase(name)) != string::npos)
         {
             courses.insert(temp);
         }
@@ -254,7 +254,7 @@ set<Course> Course::getCoursesByDepartment(const string &department)
     set<Course> courses;
     while (file >> temp)
     {
-        if (temp.getDepartment() == department)
+        if (toLowerCase(temp.getDepartment()) == toLowerCase(department))
         {
             courses.insert(temp);
         }

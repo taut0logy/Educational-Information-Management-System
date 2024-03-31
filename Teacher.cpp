@@ -168,7 +168,7 @@ set<Teacher> Teacher::getTeacherByName(const string &name)
     Teacher t;
     while (in >> t)
     {
-        if (t.getName() == name)
+        if (toLowerCase(t.getName()).find(toLowerCase(name)) != string::npos)
         {
             teachers.insert(t);
             cout << "";
@@ -189,7 +189,7 @@ set<Teacher> Teacher::getTeacherByDepartment(const string &department)
     Teacher t;
     while (in >> t)
     {
-        if (t.getDepartment() == department)
+        if (toLowerCase(t.getDepartment()) == toLowerCase(department))
         {
             teachers.insert(t);
             cout << "";
@@ -210,7 +210,7 @@ set<Teacher> Teacher::getTeacherByDesignation(const string &designation)
     Teacher t;
     while (in >> t)
     {
-        if (t.getDesignation() == designation)
+        if (toLowerCase(t.getDesignation()) == toLowerCase(designation))
         {
             teachers.insert(t);
             cout << "";
@@ -251,7 +251,6 @@ Teacher Teacher::createNewTeacher(const string &name, const string &department, 
     Teacher t;
     while (in >> t)
     {
-        // cout << t.getId() << ' ' << t.getName() << endl;
         out << t;
     }
     out << teacher;
@@ -311,6 +310,14 @@ int Teacher::edit(Teacher &teacher)
     out.close();
     remove("data/_teacherList.txt");
     rename("data/_tempTeacherList.txt", "data/_teacherList.txt");
+    if (flag == 1)
+    {
+        *this = teacher;
+    }
+    else
+    {
+        throw TeacherException("Teacher not found!");
+    }
     return flag;
 }
 
@@ -367,19 +374,15 @@ void Teacher::setQualification(const string &qualification)
 int Teacher::addCourse(const string &courseID)
 {
     Course course = Course::getCourseByCode(courseID);
-    if (course.getTeacherID() != "")
+    if (course.getTeacherID() == "**" || course.getTeacherID().empty())
     {
-        if (course.getTeacherID() == id)
-        {
-            return -1;
-        }
-        return 0;
+        courses.push_back(course);
+        course.setTeacherID(id);
+        Course::editCourseInList(course);
+        edit(*this);
+        return 1;
     }
-    courses.push_back(course);
-    course.setTeacherID(id);
-    Course::editCourseInList(course);
-    Teacher::edit(*this);
-    return 1;
+    throw TeacherException("Course already assigned to teacher with ID" + course.getTeacherID());
 }
 
 void Teacher::removeCourse(const string &courseID)
@@ -392,11 +395,11 @@ void Teacher::removeCourse(const string &courseID)
             it->setTeacherID("");
             Course::editCourseInList(*it);
             courses.erase(it);
-            Teacher::edit(*this);
-            break;
+            edit(*this);
+            return;
         }
     }
-    throw TeacherException("Course not found!");
+    throw CourseException("Course not found!");
 }
 
 void Teacher::editCourse(const Course &course)
@@ -410,14 +413,14 @@ void Teacher::editCourse(const Course &course)
             break;
         }
     }
+    throw TeacherException("Course not found!");
 }
 
 void Teacher::displayCourses() const
 {
     for (auto it = courses.begin(); it != courses.end(); it++)
     {
-        cout << "Course Name: " << it->getName() << "\t"; // "Course Name:
-        cout << "Course Code: " << it->getCode() << endl;
+        cout << *it;
     }
 }
 
@@ -503,12 +506,17 @@ ostream &operator<<(ostream &out, const Teacher &teacher)
     {
         out << c;
     }
+    if (teacher.courses.size() == 0)
+    {
+        out << "[No Courses Assigned]" << endl;
+    }
     out << endl;
     return out;
 }
 
 ifstream &operator>>(ifstream &in, Teacher &teacher)
 {
+    teacher.courses.clear();
     getline(in, teacher.id);
     getline(in, teacher.name);
     getline(in, teacher.department);
@@ -522,11 +530,18 @@ ifstream &operator>>(ifstream &in, Teacher &teacher)
     getline(in, teacher.qualification);
     int n;
     in >> n;
+    //cout << n << endl;
     in.ignore();
-    Course c;
+    if(n == 0)
+        return in;
+    string str;
     for (int i = 0; i < n; i++)
     {
-        in >> c;
+        in >> str;
+        in.ignore();
+        if(str.empty())
+            break;
+        Course c = Course::getCourseByCode(str);
         teacher.courses.push_back(c);
     }
     return in;
@@ -547,7 +562,7 @@ ofstream &operator<<(ofstream &out, const Teacher &teacher)
         << teacher.courses.size() << "\n";
     for (Course c : teacher.courses)
     {
-        out << c << "\n";
+        out << c.getCode() << "\n";
     }
     return out;
 }

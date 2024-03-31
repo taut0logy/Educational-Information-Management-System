@@ -370,7 +370,6 @@ int main()
                     }
                     cout << "Press Enter to continue...";
                     cin.ignore();
-                    cin.ignore();
                     break;
                 }
                 case 2:
@@ -407,7 +406,7 @@ int main()
                             << endl;
                     string id;
                     cout << "Enter the ID: ";
-                    getline(cin, id);
+                    cin >> id;
                     try
                     {
                         Teacher teacher = Teacher::getTeacherById(id);
@@ -1136,49 +1135,6 @@ int main()
                 }
                 break;
             }
-            // case 6:
-            // {
-            //     string password;
-            //     cout << "Enter your new password: ";
-            //     inputPassword(password);
-            //     string password2;
-            //     cout << "Re-enter your new password: ";
-            //     inputPassword(password2);
-            //     if (password != password2)
-            //     {
-            //         cout << "Error: Passwords do not match!" << endl;
-            //         cout << "Press Enter to continue...";
-            //         cin.ignore();
-            //         cin.ignore();
-            //         break;
-            //     }
-            //     string oldPassword;
-            //     cout << "Enter your old password: ";
-            //     inputPassword(oldPassword);
-            //     if (hashcode(oldPassword) != getCurrentUser()->getPasswordHash())
-            //     {
-            //         cout << "Error: Incorrect password!" << endl;
-            //         cout << "Press Enter to continue...";
-            //         cin.ignore();
-            //         cin.ignore();
-            //         break;
-            //     }
-            //     try
-            //     {
-            //         getCurrentUser()->setPassword(password);
-            //         setAdminPasswordHash(hashcode(password));
-            //         cout << "Password changed successfully!" << endl;
-            //     }
-            //     catch (UserException &e)
-            //     {
-            //         cout << e.what() << endl;
-            //     }
-
-            //     cout << "Press Enter to continue...";
-            //     cin.ignore();
-            //     cin.ignore();
-            //     break;
-            // }
             case 6:
             {
                 cout << "Logging out..." << endl;

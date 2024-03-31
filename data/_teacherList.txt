@@ -1,5 +1,5 @@
 T220598
-df
+Raufun
 CSE
 ffgdgdg
 134556465
@@ -8,4 +8,16 @@ fggfgg
 Professor
 3/2/22
 fddfdsfs
+1
+CSE1201
+T067599
+Ahsan
+EEE
+ahsan@gmail.com
+23445325
+KUET
+222
+Professor
+12/12/21
+dfggdgf
 0
